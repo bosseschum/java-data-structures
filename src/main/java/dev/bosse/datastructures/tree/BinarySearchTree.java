@@ -1,0 +1,4 @@
+package dev.bosse.datastructures.tree;
+
+public class BinarySearchTree {
+}
