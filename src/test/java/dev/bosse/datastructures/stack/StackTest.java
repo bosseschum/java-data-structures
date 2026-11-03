@@ -9,7 +9,7 @@ class StackTest {
 
     @Test
     void pushAndPopShouldFollowLifoOrder() {
-        Stack<Integer> stack = new ArrayStack<>();
+        Stack<Integer> stack = new Stack<>(8);
 
         stack.push(10);
         stack.push(20);
@@ -22,7 +22,7 @@ class StackTest {
 
     @Test
     void peekShouldNotRemoveElement() {
-        Stack<Integer> stack = new ArrayStack<>();
+        Stack<Integer> stack = new Stack<>(8);
 
         stack.push(42);
 
@@ -32,7 +32,7 @@ class StackTest {
 
     @Test
     void emptyStackShouldBeEmpty() {
-        Stack<Integer> stack = new ArrayStack<>();
+        Stack<Integer> stack = new Stack<>(8);
 
         assertTrue(stack.isEmpty());
     }

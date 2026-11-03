@@ -14,12 +14,12 @@ The project is organized into several categories:
 
 ### Linear Data Structures
 
-| Data Structure | Description | Status |
-|---|---|---|
-| Dynamic Array | Resizable array with automatic capacity management | 🚧 Planned |
-| Linked List | Node-based sequential collection | 🚧 Planned |
-| Stack | Last-In, First-Out (LIFO) collection | 🚧 Planned |
-| Queue | First-In, First-Out (FIFO) collection | 🚧 Planned |
+| Data Structure | Description                                        | Status     |
+|----------------|----------------------------------------------------|------------|
+| Dynamic Array  | Resizable array with automatic capacity management | 🚧 Planned |
+| Linked List    | Node-based sequential collection                   | ✓ |
+| Stack          | Last-In, First-Out (LIFO) collection               | ✓ |
+| Queue          | First-In, First-Out (FIFO) collection              | ✓ |
 
 ### Non-Linear Data Structures
 
