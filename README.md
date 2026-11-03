@@ -16,7 +16,7 @@ The project is organized into several categories:
 
 | Data Structure | Description                                        | Status     |
 |----------------|----------------------------------------------------|------------|
-| Dynamic Array  | Resizable array with automatic capacity management | 🚧 Planned |
+| Dynamic Array  | Resizable array with automatic capacity management | ✓ |
 | Linked List    | Node-based sequential collection                   | ✓ |
 | Stack          | Last-In, First-Out (LIFO) collection               | ✓ |
 | Queue          | First-In, First-Out (FIFO) collection              | ✓ |
