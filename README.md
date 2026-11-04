@@ -27,7 +27,7 @@ The project is organized into several categories:
 |---|---|---|
 | Binary Search Tree | Ordered binary tree supporting efficient search and insertion | 🚧 Planned |
 | AVL Tree | Self-balancing binary search tree | 🚧 Planned |
-| Hash Table | Key-value storage using hash-based indexing | 🚧 Planned |
+| Hash Table | Key-value storage using hash-based indexing | ✓ |
 | Graph | Representation of vertices and edges | 🚧 Planned |
 
 ### Algorithms
