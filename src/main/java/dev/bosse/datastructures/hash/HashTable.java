@@ -9,7 +9,9 @@ import java.util.Objects;
 public class HashTable<K, V> {
     private ArrayList<HashNode<K, V>> buckets;
     private int size;
-    private final int capacity;
+    private int capacity;
+
+    private static final double LOAD_FACTOR_THRESHOLD = 0.7;
 
     public HashTable(int capacity) {
         this.capacity = capacity;
@@ -54,8 +56,8 @@ public class HashTable<K, V> {
      * @return the bucket index for the given key
      */
     private int getBucketIndex(K key) {
-        int index = hashCode(key) % this.capacity;
-        return index < 0 ? index + this.capacity : index;
+        int index = hashCode(key) % capacity;
+        return index < 0 ? index + capacity : index;
     }
 
     /**
@@ -71,7 +73,11 @@ public class HashTable<K, V> {
         HashNode<K, V> head = this.buckets.get(bucketIndex);
         HashNode<K, V> prev = null;
 
-        while (head != null && head.key != key) {
+        while (head != null) {
+            boolean keyMatch = (key == null) ? (head.key == null) : head.key.equals(key);
+            if (keyMatch) {
+                break;
+            }
             prev = head;
             head = head.next;
         }
@@ -102,7 +108,14 @@ public class HashTable<K, V> {
 
         HashNode<K, V> head = this.buckets.get(bucketIndex);
 
-        while (head != null && head.key != key && head.hashCode != hashCode) {
+        while (head != null) {
+            if (key == null) {
+                if (head.key == null && head.hashCode == hashCode) {
+                    break;
+                }
+            } else if (head.key.equals(key) && head.hashCode == hashCode) {
+                break;
+            }
             head = head.next;
         }
 
@@ -122,7 +135,8 @@ public class HashTable<K, V> {
         HashNode<K, V> head = this.buckets.get(bucketIndex);
 
         while (head != null) {
-            if (head.key.equals(key) && head.hashCode == hashCode) {
+            boolean keyMatch = (key == null) ? (head.key == null) : head.key.equals(key);
+            if (keyMatch && head.hashCode == hashCode) {
                 head.value = value;
                 return;
             }
@@ -134,14 +148,21 @@ public class HashTable<K, V> {
         this.buckets.set(bucketIndex, newNode);
         this.size++;
 
-        if ((size * 1.0) / capacity >= 0.7 ) {
+        if ((size * 1.0) / capacity >= LOAD_FACTOR_THRESHOLD) {
             ArrayList<HashNode<K, V>> temp = buckets;
-            buckets = new ArrayList<>(2 * capacity);
+            capacity = 2 * capacity;
+            buckets = new ArrayList<>(capacity);
+            for (int i = 0; i < capacity; i++) {
+                buckets.add(null);
+            }
 
             for (HashNode<K, V> node : temp) {
                 while (node != null) {
-                    put(node.key, node.value);
-                    node = node.next;
+                    HashNode<K, V> next = node.next;
+                    int index = getBucketIndex(node.key);
+                    node.next = buckets.get(index);
+                    buckets.set(index, node);
+                    node = next;
                 }
             }
         }
